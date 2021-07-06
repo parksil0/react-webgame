@@ -28,11 +28,13 @@
       onSubmit = (e) => {
         e.preventDefault();
         if (parseInt(this.state.inputValue) === this.state.firstNum * this.state.secondNum) {
-          this.setState({
-            result: '정답',
-            firstNum: Math.ceil(Math.random() * 9),
-            secondNum: Math.ceil(Math.random() * 9),
-            inputValue: '',
+          this.setState((prevState) => {
+            return {
+              result: '정답',
+              firstNum: Math.ceil(Math.random() * 9),
+              secondNum: Math.ceil(Math.random() * 9),
+              inputValue: '',
+            }
           });
         } else {
           this.setState({
@@ -46,14 +48,14 @@
 
       render() {
         return (
-          <div>
+          <React.Fragment>
             <div>{this.state.firstNum} 곱하기 {this.state.secondNum}는?</div>
             <form onSubmit={this.onSubmit}>
               <input type="number" value={this.state.inputValue} onChange={this.onChange} />
               <button>입력!</button>
             </form>
             <div>{this.state.result}</div>
-          </div>
+          </React.Fragment>
         );
       }
     }
