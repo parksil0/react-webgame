@@ -1,6 +1,6 @@
-import path from 'path';
+const path = require('path');
 
-export default {
+module.exports =  {
   name: 'word-relay-setting',
   mode: 'development', // 실서비스 : production
   devtool: 'eval',
