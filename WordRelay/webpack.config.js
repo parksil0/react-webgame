@@ -15,6 +15,18 @@ module.exports =  {
     app: ['./client'],
   },
 
+  module: {
+    rules: [{
+      test: /\.jsx?/, // js, jsx
+      loader: 'babel-loader',
+      options: {
+        presets: [
+          '@babel/preset-env', '@babel/preset-react'
+        ],
+      }
+    }],
+  },
+
   // 중요!! - 출력
   output: {
     path: path.join(__dirname, 'dist'), // WordRelay/dist
