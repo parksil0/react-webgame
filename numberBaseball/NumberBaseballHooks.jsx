@@ -1,4 +1,4 @@
-import React, { useState, refState } from 'react';
+import React, { useState, useRef } from 'react';
 import Try from './TryHooks.jsx'
 
 function getNumbers() { // 숫자 네 개를 겹치지 않고, 랜뎜하게 뽑는 함수
@@ -18,6 +18,7 @@ const NumberBaseball = () => {
   const [value, setValue] = useState('');
   const [answer, setAnswer] = useState(getNumbers());
   const [tries, setTries] = useState([]);
+  const inputRef = useRef(null);
 
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -27,11 +28,13 @@ const NumberBaseball = () => {
       setTries((prevTries) => {
         return [...prevTries, { try: value, result: '홈런' }]
       })
+      inputRef.current.focus();
 
       alert('게임을 다시 시작합니다!');
       setValue('');
       setAnswer(getNumbers());
       setTries([]);
+      inputRef.current.focus();
     } else { // 답 틀렸으면
       const answerArray = value.split('').map((v) => parseInt(v));
       let strike = 0;
@@ -43,6 +46,7 @@ const NumberBaseball = () => {
         setValue('');
         setAnswer(getNumbers());
         setTries([]);
+        inputRef.current.focus();
       } else {
         for (let i = 0; i < 4; i += 1) {
           if (answerArray[i] === answer[i]) {
@@ -56,6 +60,7 @@ const NumberBaseball = () => {
           return [...prevTries, { try: value, result: `${strike} 스트라이크, ${ball} 볼입니다.` }]
         });
         setValue('');
+        inputRef.current.focus();
       }
     }
   }
@@ -70,7 +75,7 @@ const NumberBaseball = () => {
       <h1>{result}</h1>
       <form onSubmit={onSubmitForm}>
         {/* input창에서 value와 onchange는 한 쌍, 아니라면 defaultValue */}
-        <input maxLength={4} value={value} onChange={onChangeInput} />
+        <input ref={inputRef} maxLength={4} value={value} onChange={onChangeInput} />
       </form>
       <div>
         시도: {tries.length}
