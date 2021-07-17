@@ -2,7 +2,7 @@ const path = require('path');
 const refreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 module.exports = {
-  name: 'response-check-setring',
+  name: 'response-check-setting',
   mode: 'development',
   devtool: 'eval', //hidden-source-app
   resolve: {
