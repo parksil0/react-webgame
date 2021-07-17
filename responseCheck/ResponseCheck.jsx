@@ -46,6 +46,12 @@ class ResponseCheck extends Component {
     }
   };
 
+  onReset = () => {
+    this.setState({
+      result: [],
+    });
+  }
+
   render() {
     return (
       <>
@@ -59,7 +65,10 @@ class ResponseCheck extends Component {
         {/* jsx에서는 아무 것도 없다는 뜻이 null이다. */}
         {this.state.result.length === 0 
           ? null 
-          : <div>평균 시간: {this.state.result.reduce((a, c) => a + c) / this.state.result.length}</div>
+          : <>
+            <div>평균 시간: {this.state.result.reduce((a, c) => a + c) / this.state.result.length}</div>
+            <button onClick={this.onReset}>초기화</button>
+          </>
         }
         
       </>
